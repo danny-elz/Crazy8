@@ -1,0 +1,54 @@
+import static org.junit.Assert.*;
+import org.junit.Test;
+import cardgameweek4.Card;
+import cardgameweek4.Card.Suit;
+import cardgameweek4.Card.Value;
+
+public class CardTest {
+
+    // Testing the Card constructor
+    @Test
+    public void testCardConstructor() {
+        Card card = new Card(Suit.HEARTS, Value.ACE);
+        assertEquals(Suit.HEARTS, card.getSuit());
+        assertEquals(Value.ACE, card.getValue());
+    }
+    
+    // Testing the getValue method
+    @Test
+    public void testGetValue() {
+        Card card = new Card(Suit.SPADES, Value.FIVE);
+        assertEquals(Value.FIVE, card.getValue());
+    }
+    
+    // Testing the getSuit method
+    @Test
+    public void testGetSuit() {
+        Card card = new Card(Suit.DIAMONDS, Value.KING);
+        assertEquals(Suit.DIAMONDS, card.getSuit());
+    }
+    
+    // Testing the generateHand method with good input
+    @Test
+    public void testGenerateHandGood() {
+        Card[] hand = CardHandGenerator.generateHand(5);
+        assertEquals(5, hand.length);
+        for (Card card : hand) {
+            assertNotNull(card);
+        }
+    }
+    
+    // Testing the generateHand method with bad input
+    @Test(expected = NegativeArraySizeException.class)
+    public void testGenerateHandBad() {
+        Card[] hand = CardHandGenerator.generateHand(-1);
+    }
+    
+    // Testing the generateHand method with boundary input
+    @Test
+    public void testGenerateHandBoundary() {
+        Card[] hand = CardHandGenerator.generateHand(0);
+        assertEquals(0, hand.length);
+    }
+
+}
